@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if flag == True %}
+        <div class="alert alert-warning border border-dark" role="alert">
+          <h3><strong>WARNING:</strong> Tipo <span style="color:red">{{ tipodespesa.nome }}</span> tem despesas associadas!</h3>
+          <br>
+          <h4>Para eliminar um tipo de despesa, não pode existir despesas associadas ao mesmo!</h4>
+
+          <h4><a href="{% url 'tipodespesa-elimina-invalido-view' id_tipodespesa=tipodespesa.id %}">Clique Aqui</a> para descobrir quais as despesas em causa! </h4>
+          <br><br>
+          <h6><strong>Pode resolver esta situação de duas maneiras:</strong></h6><br>
+          <p><a href="{% url 'tipodespesa-elimina-despesasetipo-view' id_tipodespesa=tipodespesa.id %}" class="btn btn-danger btn-sm"><strong>Eliminar</strong></a>&nbsp&nbsp&nbsp  Eliminar <span style="color:red">{{ tipodespesa.nome }}</span>, juntamente com todas as despesas associadas!</p>
+          <p><a href="" class="btn btn-success btn-sm"><strong>Guardar</strong></a>&nbsp&nbsp&nbsp Eliminar <span style="color:red">{{ tipodespesa.nome }}</span>, guardando todas as despesas associadas no tipo <span style="color:red">Generico</span> que será criado automaticamente! </p>
+        </div>
+{% else %}
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card card-danger text-dark border border-dark bg-light mb-3" style="max-width:40rem;">
+          <div class="card-header"><h3>{{ tipodespesa.nome }}</h3></div>
+          <div class="card-body">
+                <form action='.' method="POST"> {% csrf_token %}
+
+      <h3>Tem a certeza que pretende eliminar definitivamente esta despesa?</h3><br>
+      <p><input type='submit' value='Sim' />&nbsp;&nbsp;<a href="{% url 'tipodespesa-lista-view' %}">Cancelar</a></p>
+
+  </form>
+          </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

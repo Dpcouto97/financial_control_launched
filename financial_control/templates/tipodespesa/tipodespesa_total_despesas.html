@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load bootstrap_icons %}
+
+{% block content %}
+<!-- Small Box (Stat card) -->
+<h5 class="mb-2 mt-4">Total Despesas</h5>
+<div class="row">
+  <div class="col-lg-3 col-6">
+    <!-- small card -->
+    <div class="small-box bg-info">
+
+      <div class="inner">
+        <h3>150€ </h3>
+
+        <p>Ultimos 30 Dias</p>
+
+
+      </div>
+        <div class="icon">
+           {% bs_icon 'currency-euro' size='1em' %}
+          </div>
+        <div class="small-box bg-info">
+          <a href="#" class="small-box-footer">
+            Ver Despesas {% bs_icon 'arrow-right-square' %}
+          </a>
+        </div>
+    </div>
+  </div>
+  <!-- ./col -->
+</div>
+<script>
+    var ctx = document.getElementById('despesas_chart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Despesas"],
+            datasets: [{
+                data: [{{ total_custos }}],
+                backgroundColor: [
+                    'rgba(245, 79, 32, 0.8)',
+                ],
+                borderColor: [
+                    'rgba(0, 0, 0, 1)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+
+            }
+        }
+    });
+</script>
+{% endblock %}

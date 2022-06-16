@@ -1,0 +1,71 @@
+{% load bootstrap_icons %}
+<!-- Title Bar Starts -->
+<div class="container-fluid px-md-5">
+    <div class="row justify-content-between">
+        <div class="col-md-8 order-md-last">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <a class="navbar-brand" href="{% url 'homepage-view' %}">Controlo<span>Financeiro</span></a>
+                </div>
+                <div class="col-md-6 d-md-flex justify-content-end mb-md-0 mb-3 align-self-center">
+                   {% if user.is_authenticated %}
+                      <p class="text-darker text-capitalize ">Welcome, {{ user.username }}.</p>&nbsp;&nbsp;
+                      <p class="text-darker font-weight-bold"><a href="{% url 'logout' %}">Logout</a></p>
+                  {% else %}
+                    <p class="text-darker text-capitalize">Welcome, new user. </p>&nbsp;&nbsp;
+                    <p class="text-darker font-weight-bold"><a href="{% url 'login' %}">Login</a></p>
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Let this empty div stay here, so the Usecase Title can be centered right in the middle. -->
+        </div>
+    </div>
+</div>
+<!-- Title Bar Ends -->
+<!-- Nabvar Starts-->
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-darker ftco-navbar-light" id="ftco-navbar">
+<div class="container-fluid">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+    {% bs_icon 'justify' size='1em' %} Menu
+  </button>
+  <div class="collapse navbar-collapse" id="ftco-nav">
+    <ul class="navbar-nav m-auto">
+      <li class="nav-item active"><a href="{% url 'homepage-view' %}" class="nav-link">Home</a></li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkClient" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Despesa</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkClient">
+            <a class="dropdown-item" href="{% url 'despesa-registo-view' %}">Registar Despesa</a>
+            <a class="dropdown-item" href="{% url 'despesa-lista-view' %}">Listar Despesas</a>
+            <a class="dropdown-item" href="{% url 'despesa-visaogeral-view' %}">Visão Geral</a>
+          </div>
+    </li>
+    <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkSiem" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tipo de Despesa</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkSiem">
+            <a class="dropdown-item" href="{% url 'tipodespesa-registo-view' %}">Registar Tipo</a>
+            <a class="dropdown-item" href="{% url 'tipodespesa-lista-view' %}">Listar Tipos</a>
+          </div>
+    </li>
+    <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkUsecase" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Receita</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkUsecase">
+            <a class="dropdown-item" href="">Registar Receita</a>
+            <a class="dropdown-item" href="">Listar Receitas</a>
+          </div>
+    </li>
+    <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkLogSource" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Testes</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkLogSource">
+            <a class="dropdown-item" href="">teste 1</a>
+            <a class="dropdown-item" href="">teste 2</a>
+            <a class="dropdown-item" href="">teste 3</a>
+          </div>
+    </li>
+
+    </ul>
+  </div>
+</div>
+</nav>
+<!-- Navbar Ends-->

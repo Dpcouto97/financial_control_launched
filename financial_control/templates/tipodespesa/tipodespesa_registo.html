@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container w-75 p-3 rounded bg-light border border-dark">
+    <h1>Registar Tipo de Despesa</h1>
+    <p>Nesta área pode registar um tipo de despesa.</p><br>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="row mb-3">
+        <label class="col col-form-label">Nome</label>
+        <div class="col-sm-10">
+          {{ form.nome}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col col-form-label">Descrição</label>
+        <div class="col-sm-10">
+          {{ form.descricao}}
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Registar</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="alert alert-success border border-dark" role="alert">
+    <h5>Operação realizada com sucesso!</h5>
+</div>
+<div class="container">
+  <h2>Lista de Tipos de Despesa</h2><br>
+  <table id="table_tipodespesaslista" class="table table-hover  table-bordered" >
+    <caption>Tipos de Despesas</caption>
+    <thead class="table-dark">
+      <tr>
+        <th scope="col" width="10%">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Descrição</th>
+        <th scope="col" width="10%">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for tipodespesa_atual in tipodespesa_lista %}
+    <!-- Class "clicable-row" permite nos que ao clicar na linha da tabela nos leve para onde desejamos -->
+    <tr class='clickable-row' data-href= "{{ tipodespesa_atual.get_detalhes_url }}">
+      <th>{{ tipodespesa_atual.id }}</th>
+      <td>{{ tipodespesa_atual.nome }}</td>
+      <td>{{ tipodespesa_atual.descricao }}</td>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="{{ tipodespesa_atual.get_atualiza_url }}" class="btn btn-secondary">Editar</a>
+        <a href="{{ tipodespesa_atual.get_elimina_url }}" class="btn btn-danger">Eliminar</a>
+      </div>
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Script DataTables Sort -->
+<script>
+    $(document).ready(function() {
+      $('#table_tipodespesaslista').DataTable({
+          dom: 'Blfrtip',
+          lengthMenu: [
+              [10, 25, 50, -1],
+              ['10', '25', '50', 'All']
+          ],
+          buttons: [
+            {
+                extend: 'collection',
+                text: 'Export',
+                buttons: ['csvHtml5', 'pdfHtml5']
+            }
+          ]
+      });
+    } );
+</script>
+
+<!-- Script JQuery Clickable Row -->
+<script>
+    jQuery(document).ready(function($) {
+       $(document).off('click','.clickable-row').on('click','.clickable-row',function() {
+          window.document.location = $(this).data("href");
+       });
+    });
+</script>
+{% endblock %}

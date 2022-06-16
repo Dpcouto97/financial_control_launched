@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .login-form {
+        width: 340px;
+        margin: 50px auto;
+        font-size: 15px;
+    }
+    .login-form form {
+        margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .btn {
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+<div class="login-form">
+    <form method="POST">
+        {% csrf_token %}
+        <h2 class="text-center">Log in</h2>
+        <div class="form-group">
+            <label for="username" class="col-md-4 control-label text-right">Username:</label>
+            <div class="col-md-6">
+                {{ form.username}}
+            </div>
+        </div>
+        <div class="form-group">
+             <label for="password" class="col-md-4 control-label text-right">Password:</label>
+            <div class="col-md-6">
+                {{ form.password}}
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+        </div>
+    </form>
+    <div>
+        {% for message in messages %}
+            <div class="alert alert-warning border border-dark" role="alert">
+              <h3> {{ message }}</h3>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

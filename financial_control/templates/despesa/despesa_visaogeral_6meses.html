@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load bootstrap_icons %}
+{% block content %}
+<div class="container">
+  <h2>Despesas - Ultimos 6 Meses</h2><br>
+  <table id="table_despesaslista" class="table table-hover  table-bordered" >
+    <caption>Despesas</caption>
+    <thead class="table-dark">
+      <tr>
+        <th scope="col" width="10%">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Valor ( € )</th>
+        <th scope="col">Data</th>
+        <th scope="col" width="10%">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for despesa_atual in despesas_6meses_lista %}
+    <!-- Class "clicable-row" permite nos que ao clicar na linha da tabela nos leve para onde desejamos -->
+    <tr class='clickable-row' data-href= "{{ despesa_atual.get_detalhes_url }}">
+      <th>{{ despesa_atual.id }}</th>
+      <td>{{ despesa_atual.nome }}</td>
+      <td>{{ despesa_atual.tipo_despesa }}</td>
+      <td>{{ despesa_atual.valor }}</td>
+      <td>{{ despesa_atual.date }}</td>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="{{ despesa_atual.get_atualiza_url }}" class="btn btn-secondary">{% bs_icon 'pencil-square' %}</a>
+        <a href="{{ despesa_atual.get_elimina_url }}" class="btn btn-danger">{% bs_icon 'trash3' %}</a>
+      </div>
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Script DataTables Sort -->
+<script>
+    $(document).ready(function() {
+      $('#table_despesaslista').DataTable({
+          dom: 'Blfrtip',
+          lengthMenu: [
+              [10, 25, 50, -1],
+              ['10', '25', '50', 'All']
+          ],
+          buttons: [
+            {
+                extend: 'collection',
+                text: 'Export',
+                buttons: ['csvHtml5', 'pdfHtml5']
+            }
+          ]
+      });
+    } );
+</script>
+
+<!-- Script JQuery Clickable Row -->
+<script>
+    jQuery(document).ready(function($) {
+       $(document).off('click','.clickable-row').on('click','.clickable-row',function() {
+          window.document.location = $(this).data("href");
+       });
+    });
+</script>
+{% endblock %}

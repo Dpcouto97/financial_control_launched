@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h1>Tipo - Detalhes</h1><br>
+        <div class="card card-primary text-dark border border-dark mb-3" style="max-width:40rem;">
+          <div class="card-header"><h4>{{ tipodespesa.nome }}</h4></div>
+          <div class="card-body">
+            <p class="card-text"><b>ID:</b> {{ tipodespesa.id }}</p>
+            <p class="card-text"><b>Nome:</b> {{ tipodespesa.nome }}</p>
+            <p class="card-text"><b>Descricao:</b> {{ tipodespesa.descricao }}</p>
+            <p class="card-text"><b>Data de Criacao:</b> {{ tipodespesa.date }}</p>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{{ tipodespesa.get_atualiza_url }}" class="btn btn-secondary">Editar</a>
+                <a href="{{ tipodespesa.get_elimina_url }}" class="btn btn-danger">Eliminar</a>
+            </div>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Opções..
+          </button>
+          <div class="dropdown-menu bg-primary">
+            <a class="dropdown-item bg-primary text-light" href="{{ tipodespesa.get_total_despesas_url }}">Total Despesas</a>
+            <a class="dropdown-item bg-primary text-light" href="">teste2</a>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

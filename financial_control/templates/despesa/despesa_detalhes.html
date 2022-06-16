@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h1>Despesa- Detalhes</h1><br>
+        <div class="card card-primary text-dark border border-dark mb-3" style="max-width:40rem;">
+          <div class="card-header"><h4>{{ despesa.nome }}</h4></div>
+          <div class="card-body">
+            <p class="card-text"><b>ID:</b> {{ despesa.id }}</p>
+            <p class="card-text"><b>Nome:</b> {{ despesa.nome }}</p>
+            <p class="card-text"><b>Descricão:</b> {{ despesa.descricao }}</p>
+            <p class="card-text"><b>Tipo:</b> {{ despesa.tipo_despesa }}</p>
+            <p class="card-text"><b>Valor ( € ) :</b> {{ despesa.valor }}</p>
+            <p class="card-text"><b>Data de Criacao:</b> {{ despesa.date }}</p>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{{ despesa.get_atualiza_url }}" class="btn btn-secondary">Editar</a>
+                <a href="{{ despesa.get_elimina_url }}" class="btn btn-danger">Eliminar</a>
+            </div>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            More Options..
+          </button>
+          <div class="dropdown-menu bg-primary">
+            <a class="dropdown-item bg-primary text-light" href="">teste1</a>
+            <a class="dropdown-item bg-primary text-light" href="">teste2</a>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
